@@ -14,11 +14,9 @@ import java.net.URI
 class SignService() {
     @PostMapping
     fun postSigns(@RequestBody sign: Sign, restTemplate: RestTemplate) {
-        println(sign)
         val headers = HttpHeaders()
         headers.contentType = MediaType.APPLICATION_JSON
         val requestEntity = HttpEntity(sign, headers)
-        val responseEntity = restTemplate.postForEntity(URI("http://localhost:8081/SMP/signs"), requestEntity, Sign::class.java)
-        println(responseEntity)
+        restTemplate.postForEntity(URI("http://ec2-18-191-67-195.us-east-2.compute.amazonaws.com:8080/SMP/signs"), requestEntity, Sign::class.java)
     }
 }
