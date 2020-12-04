@@ -19,6 +19,8 @@ class ServicioDiagnostico: ApplicationContextAware {
 
     @PostMapping
     fun receiveRead(@RequestBody read: Read, restTemplate: RestTemplate) {
+        println(read)
+
         read.sanitize()
         if (!read.isValid())
             return

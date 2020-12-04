@@ -58,6 +58,9 @@ class HerramientaDiagnostico: ApplicationContextAware {
     }
 
     fun putPatientSign(patientId: String, sign: Sign) {
-        return manejadorBD.putPatientSign(patientId, sign)
+        manejadorBD.putPatientSign(patientId, sign)
+        val signs = manejadorBD.getPatientSigns(patientId)
+        if (signs != null)
+            patientSigns.set(patientId, signs)
     }
 }
