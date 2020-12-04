@@ -10,7 +10,7 @@ import java.net.URI
 
 class SolicitudEventos {
 
-    private val apiReadURI: String = "http://localhost:8081/events"
+    private val apiReadURI: String = "http://ec2-18-191-67-195.us-east-2.compute.amazonaws.com:8080/events"
     private val restTemplate: RestTemplate = RestTemplate()
 
     fun propagateRead(read: Read) {
