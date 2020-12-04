@@ -13,31 +13,25 @@ class SolicitudEventos {
     private val apiReadURI: String = "http://ec2-18-191-67-195.us-east-2.compute.amazonaws.com:8080/events"
     private val restTemplate: RestTemplate = RestTemplate()
 
-    fun propagateRead(read: Read) {
+    fun sendNormalRead(read: Read) {
         val headers = HttpHeaders()
         headers.contentType = MediaType.APPLICATION_JSON
         val requestEntity = HttpEntity(read, headers)
-        restTemplate.postForEntity(URI("$apiReadURI/reads"), requestEntity, Read::class.java)
-    }
-
-    fun sendNormalRead(read: Read) {
-        propagateRead(read)
+        restTemplate.postForEntity(URI("$apiReadURI/patients/${read.patientID}/reads/normal"), requestEntity, Read::class.java)
     }
 
     fun sendWarningRead(read: Read) {
-        propagateRead(read)
         val headers = HttpHeaders()
         headers.contentType = MediaType.APPLICATION_JSON
         val requestEntity = HttpEntity(read, headers)
-        restTemplate.postForEntity(URI("$apiReadURI/reads/warning"), requestEntity, Read::class.java)
+        restTemplate.postForEntity(URI("$apiReadURI/patients/${read.patientID}/reads/warning"), requestEntity, Read::class.java)
     }
 
     fun sendDangerRead(read: Read) {
-        propagateRead(read)
         val headers = HttpHeaders()
         headers.contentType = MediaType.APPLICATION_JSON
         val requestEntity = HttpEntity(read, headers)
-        restTemplate.postForEntity(URI("$apiReadURI/reads/danger"), requestEntity, Read::class.java)
+        restTemplate.postForEntity(URI("$apiReadURI/patients/${read.patientID}/reads/danger"), requestEntity, Read::class.java)
     }
 
     fun propagateSignChange(patientId: String, sign: Sign) {
