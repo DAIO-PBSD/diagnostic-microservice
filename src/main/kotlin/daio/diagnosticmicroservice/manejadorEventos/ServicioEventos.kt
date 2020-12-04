@@ -28,7 +28,7 @@ class ServicioEventos: ApplicationContextAware {
         sign.sanitize()
         if (!sign.isValid())
             return null
-        println("Putting Patient Sign")
+
         herrDiagnostico.putPatientSign(patient_id, sign)
         return solicitudEventos.propagateSignChange(patient_id, sign)
     }
